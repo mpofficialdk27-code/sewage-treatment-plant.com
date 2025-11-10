@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STP क्या है? | जल स्वच्छता मिशन</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="{{ url_for('home') }}" class="logo-link">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="जल संरक्षण लोगो" class="logo-img">
+            </a>
+
+            <ul>
+                <li><a href="{{ url_for('home') }}">होम</a></li>
+                <li><a href="{{ url_for('about') }}" class="active">STP क्या है?</a></li>
+                <li><a href="{{ url_for('how_it_works') }}">यह कैसे काम करता है?</a></li>
+                <li><a href="{{ url_for('updates') }}">सूचनाएं</a></li>
+            </ul>
+            <button class="menu-toggle">☰</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content-box">
+            <h1>सीवर ट्रीटमेंट प्लांट (STP) क्या है?</h1>
+            <p>सीवर ट्रीटमेंट प्लांट (Sewage Treatment Plant), जिसे STP भी कहा जाता है, एक ऐसी सुविधा है जहाँ घरों, दफ्तरों और इंडस्ट्री से निकलने वाले गंदे पानी (सीवेज) को साफ़ किया जाता है।</p>
+            <p>इस प्रक्रिया का मुख्य उद्देश्य पानी में मौजूद गंदगी, हानिकारक बैक्टीरिया और रसायनों को हटाना है, ताकि साफ़ किए गए पानी को सुरक्षित रूप से वापस नदियों, झीलों या समुद्र में छोड़ा जा सके या फिर सिंचाई और अन्य कामों के लिए पुनः उपयोग (reuse) किया जा सके।</p>
+
+            <h2>STP की आवश्यकता क्यों है?</h2>
+            <p>यदि गंदे पानी को बिना साफ़ किए सीधे नदियों या तालाबों में छोड़ दिया जाए, तो इसके गंभीर परिणाम हो सकते हैं:</p>
+            <ul>
+                <li><strong>जल प्रदूषण:</strong> नदियों का पानी जहरीला हो जाता है, जिससे जलीय जीवन (मछलियाँ, पौधे) मरने लगते हैं।</li>
+                <li><strong>बीमारियाँ:</strong> दूषित पानी हैजा, टाइफाइड और पीलिया जैसी गंभीर बीमारियों का कारण बनता है।</li>
+                <li><strong>पर्यावरणीय असंतुलन:</strong> पानी में गंदगी के कारण ऑक्सीजन का स्तर कम हो जाता है, जिससे पूरा इको-सिस्टम खराब हो जाता है।</li>
+            </ul>
+            <p>STP इन सभी समस्याओं को रोककर पर्यावरण और मानव स्वास्थ्य की रक्षा करता है।</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="disclaimer">
+            <strong>अस्वीकरण (Disclaimer):</strong> यह एक गैर-सरकारी और शैक्षणिक (non-governmental and educational) वेबसाइट है। इसका मध्य प्रदेश सरकार या किसी भी सरकारी विभाग से कोई संबंध नहीं है।
+        </div>
+        <p>&copy; 2025 | एक शैक्षणिक प्रोजेक्ट</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} | जल स्वच्छता मिशन</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="{{ url_for('home') }}" class="logo-link">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="जल संरक्षण लोगो" class="logo-img">
+            </a>
+            
+            <ul>
+                <li><a href="{{ url_for('home') }}">होम</a></li>
+                <li><a href="{{ url_for('about') }}">STP क्या है?</a></li>
+                <li><a href="{{ url_for('how_it_works') }}">यह कैसे काम करता है?</a></li>
+                <li><a href="{{ url_for('updates') }}" class="active">सूचनाएं</a></li>
+            </ul>
+            <button class="menu-toggle">☰</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content-box">
+            <h1>सूचनाएं और अपडेट</h1>
+            <p>यह पेज प्रोजेक्ट से सम्बंधित जानकारी या जल संरक्षण पर लेख पोस्ट करने के लिए है।</p>
+
+            <div class="update-list">
+                
+                {% if posts|length == 0 %}
+                    <article class="update-item">
+                        <h3>अभी कोई सूचना उपलब्ध नहीं है।</h3>
+                    </article>
+                {% endif %}
+
+                {% for post in posts %}
+                    <article class="update-item">
+                        <div class="date">{{ post.date_posted.strftime('%d %B, %Y') }}</div>
+                        <h3>{{ post.title }}</h3>
+                        <p>{{ post.content }}</p>
+                    </article>
+                {% endfor %}
+
+            </div>
+            </section>
+    </main>
+
+    <footer>
+        <div class="disclaimer">
+            <strong>अस्वीकरण (Disclaimer):</strong> यह एक गैर-सरकारी और शैक्षणिक (non-governmental and educational) वेबसाइट है। इसका मध्य प्रदेश सरकार या किसी भी सरकारी विभाग से कोई संबंध नहीं है।
+        </div>
+        <p>&copy; 2025 | एक शैक्षणिक प्रोजेक्ट</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

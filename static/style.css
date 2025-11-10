@@ -1,0 +1,212 @@
+/* --- Google Fonts (हिन्दी के लिए) --- */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+/* --- बेसिक रीसेट --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', 'Noto Sans Devanagari', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+/* --- हेडर और नेविगेशन --- */
+header {
+    background-color: #ffffff;
+    border-bottom: 3px solid #0D47A1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 1rem 5%;
+    position: relative; 
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* --- लोगो के लिए स्टाइल --- */
+nav .logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+nav .logo-img {
+    height: 45px;
+    width: auto;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 1.5rem;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #1976D2;
+    font-weight: 700;
+    padding: 0.5rem;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: #0D47A1;
+    border-bottom: 2px solid #0D47A1;
+}
+
+/* --- मोबाइल मेनू (हैमबर्गर आइकॉन) --- */
+.menu-toggle {
+    display: none; 
+    font-size: 2rem;
+    color: #0D47A1;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* --- मुख्य कंटेंट --- */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+h1, h2, h3 {
+    color: #0D47A1;
+    margin-bottom: 1rem;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+}
+
+.content-box {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+/* --- होम पेज: हीरो सेक्शन --- */
+.hero {
+    background-color: #1976D2;
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+.hero h1 {
+    color: white;
+    font-size: 2.5rem;
+}
+.hero p {
+    font-size: 1.2rem;
+}
+
+/* होम पेज: विज़न सेक्शन */
+.vision {
+    display: flex;
+    gap: 2rem;
+}
+.vision .vision-text { flex: 2; }
+.vision .vision-image { flex: 1; text-align: center; }
+.vision .vision-image img { max-width: 200px; border-radius: 5px; }
+
+/* 'How it Works' पेज: स्टेप्स */
+.step {
+    border-left: 4px solid #1976D2;
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+}
+.step h3 { color: #1976D2; }
+
+/* 'Updates' पेज: सूचना लिस्ट */
+.update-item {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+.update-item h3 { color: #333; }
+.update-item .date { font-size: 0.9rem; color: #777; margin-bottom: 0.5rem; }
+
+/* --- फुटर --- */
+footer {
+    background-color: #333;
+    color: #aaa;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+}
+
+.disclaimer {
+    max-width: 800px;
+    margin: 0 auto 1rem auto;
+    border: 1px solid #555;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: #444;
+}
+.disclaimer strong {
+    color: #FFC107;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+/* --- Responsive Design (Media Queries) --- */
+@media (max-width: 768px) {
+    nav ul {
+        display: none; 
+        flex-direction: column; 
+        width: 100%;
+        position: absolute;
+        top: 100%; 
+        left: 0;
+        background-color: #ffffff;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        z-index: 10;
+    }
+
+    nav ul.active {
+        display: flex; 
+    }
+
+    nav ul li {
+        margin: 0;
+        text-align: center;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 1rem;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    nav ul li a:hover,
+    nav ul li a.active {
+        border-bottom: 1px solid #f0f0f0;
+        background-color: #f9f9f9;
+    }
+
+    .menu-toggle {
+        display: block; 
+    }
+
+    .vision {
+        flex-direction: column; 
+    }
+}

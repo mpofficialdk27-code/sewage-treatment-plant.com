@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>यह कैसे काम करता है? | जल स्वच्छता मिशन</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="{{ url_for('home') }}" class="logo-link">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="जल संरक्षण लोगो" class="logo-img">
+            </a>
+
+            <ul>
+                <li><a href="{{ url_for('home') }}">होम</a></li>
+                <li><a href="{{ url_for('about') }}">STP क्या है?</a></li>
+                <li><a href="{{ url_for('how_it_works') }}" class="active">यह कैसे काम करता है?</a></li>
+                <li><a href="{{ url_for('updates') }}">सूचनाएं</a></li>
+            </ul>
+            <button class="menu-toggle">☰</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content-box">
+            <h1>STP पानी को कैसे साफ़ करता है?</h1>
+            <p>सीवर ट्रीटमेंट प्लांट में पानी को साफ़ करने की एक पूरी प्रक्रिया होती है, जिसे मुख्य रूप से तीन चरणों में बाँटा जाता है:</p>
+
+            <div class="step">
+                <h3>चरण 1: प्रिलिमिनरी ट्रीटमेंट (Preliminary Treatment)</h3>
+                <p>यह सबसे पहला चरण है। इसमें सीवेज के पानी में से बड़ा-बड़ा कचरा जैसे प्लास्टिक, कपड़े, लकड़ी, पत्थर आदि को बड़ी-बड़ी जाली (Bar Screens) की मदद से अलग किया जाता है। इसके बाद पानी को 'ग्रिट चैम्बर' से गुजारा जाता है जहाँ रेत, मिट्टी और कंकड़ नीचे बैठ जाते हैं।</p>
+            </div>
+            <div class="step">
+                <h3>चरण 2: प्राइमरी ट्रीटमेंट (Primary Treatment)</h3>
+                <p>इस चरण में पानी को बड़े-बड़े टैंकों में कुछ घंटों के लिए स्थिर रखा जाता है। इसे 'सेडिमेंटेशन' (Sedimentation) कहते हैं। इस दौरान पानी में घुली हुई भारी गंदगी (ठोस मल) नीचे बैठ जाती है, जिसे 'स्लज' (Sludge) कहते हैं, और हल्का कचरा जैसे तेल और ग्रीस ऊपर तैरने लगता है, जिसे हटा दिया जाता है।</p>
+            </div>
+            <div class="step">
+                <h3>चरण 3: सेकेंडरी ट्रीटमेंट (Secondary Treatment)</h3>
+                <p>यह सबसे महत्वपूर्ण चरण है। यहाँ पानी में मौजूद उस गंदगी को साफ़ किया जाता है जो घुली हुई होती है और दिखाई नहीं देती। इसके लिए 'बायोलॉजिकल' तरीका अपनाया जाता है। पानी में 'अच्छे बैक्टीरिया' (Good Bacteria) छोड़े जाते हैं और खूब सारी हवा (ऑक्सीजन) दी जाती है। ये बैक्टीरिया पानी में मौजूद गंदगी को 'खा' जाते हैं और उसे साफ़ कर देते हैं।</t>
+            </div>
+             <div class="step">
+                <h3>चरण 4: टर्शियरी / फाइनल ट्रीटमेंट (Tertiary Treatment)</h3>
+                <p>सेकेंडरी ट्रीटमेंट के बाद पानी काफी हद तक साफ़ हो जाता है। आखिरी चरण में इसे कीटाणुरहित (Disinfect) किया जाता है। इसके लिए पानी में क्लोरीन मिलाया जाता है या उसे UV (पराबैंगनी) किरणों से गुजारा जाता है, ताकि बचे-कुचे हानिकारक बैक्टीरिया भी मर जाएँ। अब यह साफ़ पानी नदियों में छोड़ने या सिंचाई के लिए पूरी तरह सुरक्षित है।</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="disclaimer">
+            <strong>अस्वीकरण (Disclaimer):</strong> यह एक गैर-सरकारी और शैक्षणिक (non-governmental and educational) वेबसाइट है। इसका मध्य प्रदेश सरकार या किसी भी सरकारी विभाग से कोई संबंध नहीं है।
+        </div>
+        <p>&copy; 2025 | एक शैक्षणिक प्रोजेक्ट</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

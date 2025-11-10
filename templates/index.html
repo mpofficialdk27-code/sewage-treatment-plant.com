@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <title>जल स्वच्छता मिशन (शैक्षणिक)</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="{{ url_for('home') }}" class="logo-link">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="जल संरक्षण लोगो" class="logo-img">
+            </a>
+            
+            <ul>
+                <li><a href="{{ url_for('home') }}" class="active">होम</a></li>
+                <li><a href="{{ url_for('about') }}">STP क्या है?</a></li>
+                <li><a href="{{ url_for('how_it_works') }}">यह कैसे काम करता है?</a></li>
+                <li><a href="{{ url_for('updates') }}">सूचनाएं</a></li>
+            </ul>
+            <button class="menu-toggle">☰</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>स्वच्छ जल, स्वस्थ मध्य प्रदेश</h1>
+            <p>सीवर ट्रीटमेंट प्लांट (STP) हमारे शहरों को स्वच्छ रखने और नदियों को पुनर्जीवित करने में महत्वपूर्ण भूमिका निभाते हैं।</p>
+        </section>
+
+        <section class="content-box vision">
+            <div class="vision-text">
+                <h2>हमारा विज़न: स्वच्छता और विकास</h2>
+                <p>
+                    माननीय प्रधानमंत्री श्री नरेंद्र मोदी जी के 'स्वच्छ भारत मिशन' और माननीय मुख्यमंत्री जी के 'विकसित मध्य प्रदेश' के विज़न से प्रेरित होकर, यह वेबसाइट सीवर ट्रीटमेंट की तकनीक और इसके फायदों के बारे में जानकारी प्रदान करती है।
+                </p>
+                <p>
+                    जल संरक्षण और पुनः उपयोग आज की सबसे बड़ी आवश्यकता है। इस शैक्षणिक पहल का उद्देश्य इसी महत्वपूर्ण विषय पर जागरूकता फैलाना है।
+                </p>
+            </div>
+            <div class="vision-image">
+                <img src="{{ url_for('static', filename='swachh-bharat.png') }}" alt="स्वच्छ भारत मिशन लोगो">
+                <p style="font-size: 0.9rem; color: #555;">स्वच्छ भारत - एक कदम स्वच्छता की ओर</p>
+            </div>
+        </section>
+
+        <section class="content-box">
+            <h2>जानें कि एक STP कैसे काम करता है</h2>
+            <p>क्या आप जानते हैं कि गंदे पानी को कई चरणों में साफ़ करके नदियों में छोड़ने या सिंचाई के लिए पुनः उपयोग करने लायक कैसे बनाया जाता है? यह प्रक्रिया विज्ञान और इंजीनियरिंग का एक बेहतरीन नमूना है।</p>
+            <a href="{{ url_for('how_it_works') }}" style="text-decoration: none; background-color: #0D47A1; color: white; padding: 10px 15px; border-radius: 5px;">पूरी प्रक्रिया देखें</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="disclaimer">
+            <strong>अस्वीकरण (Disclaimer):</strong> यह एक गैर-सरकारी और शैक्षणिक (non-governmental and educational) वेबसाइट है। इसका मध्य प्रदेश सरकार या किसी भी सरकारी विभाग से कोई संबंध नहीं है। इस वेबसाइट पर दी गई जानकारी केवल सीवर ट्रीटमेंट प्लांट की प्रक्रिया और महत्व को समझाने के उद्देश्य से है। यह किसी भी आधिकारिक स्रोत का प्रतिनिधित्व नहीं करती है।
+        </div>
+        <p>&copy; 2025 | एक शैक्षणिक प्रोजेक्ट</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
