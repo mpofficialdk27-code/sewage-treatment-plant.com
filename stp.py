@@ -1,4 +1,5 @@
 import os
+import platform  # यह OS (Windows/Linux) चेक करने के लिए है
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -6,21 +7,30 @@ from datetime import datetime
 app = Flask(__name__)
 base_dir = os.path.abspath(os.path.dirname(__file__))
 
-# --- डायनेमिक डेटाबेस कॉन्फ़िगरेशन ---
+# --- डायनेमिक डेटाबेस कॉन्फ़िगरेशन (Windows और Render दोनों के लिए) ---
 IS_ON_RENDER = os.environ.get('RENDER', False)
+
 if IS_ON_RENDER:
-    # Render पर: /var/data/ (Persistent Disk) में सेव करें
+    # Render (Linux) पर: /var/data/ (Persistent Disk) में सेव करें
     RENDER_DISK_PATH = '/var/data'
     DATABASE_PATH = os.path.join(RENDER_DISK_PATH, 'database.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + DATABASE_PATH
     print(f"Render एनवायरनमेंट डिटेक्ट हुआ। DB पाथ: {DATABASE_PATH}")
 else:
-    # लोकल (आपके लैपटॉप) पर: फ़ोल्डर में ही सेव करें
+    # लोकल (Laptop) पर:
     DATABASE_PATH = os.path.join(base_dir, 'database.db')
-    print(f"लोकल एनवायरनमेंट डिटेक्ट हुआ। DB पाथ: {DATABASE_PATH}")
+    
+    # --- Windows पाथ फिक्स ---
+    # Windows पाथ (C:\...) को फॉरवर्ड स्लैश (C:/...) में बदलें
+    # और 3 स्लैश (sqlite:///) का इस्तेमाल करें
+    DATABASE_PATH_FOR_URI = DATABASE_PATH.replace(os.sep, '/')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + DATABASE_PATH_FOR_URI
+    # --- फिक्स खत्म ---
+    
+    print(f"लोकल एनवायरनमेंट डिटेक्ट हुआ। DB URI: {app.config['SQLALCHEMY_DATABASE_URI']}")
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + DATABASE_PATH
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 db = SQLAlchemy(app)
 
 # --- डेटाबेस मॉडल (सूचना टेबल) ---
@@ -33,9 +43,8 @@ class UpdatePost(db.Model):
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
 
-# --- DB Creation Logic (सबसे ज़रूरी हिस्सा) ---
-# यह ब्लॉक Waitress (Render) या `python stp.py` (लोकल) 
-# दोनों द्वारा ऐप इनिशियलाइज़ होते ही रन होगा।
+# --- DB Creation Logic ---
+# यह ब्लॉक ऐप इनिशियलाइज़ होते ही रन होगा (Render और लोकल दोनों पर)
 with app.app_context():
     print("डेटाबेस टेबल्स के लिए db.create_all() रन किया जा रहा है...")
     db.create_all()
@@ -72,14 +81,11 @@ def how_it_works():
 
 @app.route("/updates")
 def updates():
-    # बैकएंड का काम: डेटाबेस से सभी पोस्ट को 'तारीख' के हिसाब से (नई पहले) ऑर्डर करो
     posts = UpdatePost.query.order_by(UpdatePost.date_posted.desc()).all()
-    
-    # 'updates.html' पेज को रेंडर करो और उसे सभी 'posts' भेज दो
     return render_template('updates.html', posts=posts, title="सूचनाएं")
 
 # --- ऐप को रन करो ---
 if __name__ == '__main__':
-    # यह सिर्फ लोकल चलाने के लिए है
+    # यह सिर्फ लोकल (आपके लैपटॉप) पर चलाने के लिए है
     print("लोकल सर्वर (debug mode) स्टार्ट हो रहा है...")
     app.run(debug=True)
