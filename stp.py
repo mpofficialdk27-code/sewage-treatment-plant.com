@@ -7,8 +7,10 @@ from datetime import datetime
 app = Flask(__name__)
 base_dir = os.path.abspath(os.path.dirname(__file__))
 
-# --- डायनेमिक डेटाबेस कॉन्फ़िगरेशन (Windows और Render दोनों के लिए) ---
-IS_ON_RENDER = os.environ.get('RENDER', False)
+# --- डायनेमिक डेटाबेस कॉन्फ़ि... (यह 100% सही तरीका है) ---
+
+# हम Render के एक पक्के वेरिएबल ('PORT') को चेक करेंगे
+IS_ON_RENDER = "PORT" in os.environ
 
 if IS_ON_RENDER:
     # Render (Linux) पर: /var/data/ (Persistent Disk) में सेव करें
@@ -37,7 +39,7 @@ class UpdatePost(db.Model):
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
 
-# --- DB Creation Logic (यह नया और ज़्यादा सुरक्षित तरीका है) ---
+# --- DB Creation Logic (यह सबसे सुरक्षित तरीका है) ---
 # यह 'flag' ट्रैक करेगा कि DB इनिशियलाइज़ हुआ है या नहीं
 db_initialized = False
 
@@ -47,7 +49,6 @@ def initialize_database():
     # यह कोड सिर्फ एक बार चलेगा, जब db_initialized = False होगा
     if not db_initialized:
         print("डेटाबेस इनिशियलाइज़ेशन शुरू हो रहा है...")
-        # app_context की ज़रूरत नहीं है क्योंकि हम @app.before_request में हैं
         db.create_all()
         
         if UpdatePost.query.count() == 0:
