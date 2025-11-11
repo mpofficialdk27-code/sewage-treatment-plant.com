@@ -19,15 +19,9 @@ if IS_ON_RENDER:
 else:
     # लोकल (Laptop) पर:
     DATABASE_PATH = os.path.join(base_dir, 'database.db')
-    
-    # --- Windows पाथ फिक्स ---
-    # Windows पाथ (C:\...) को फॉरवर्ड स्लैश (C:/...) में बदलें
-    # और 3 स्लैश (sqlite:///) का इस्तेमाल करें
     DATABASE_PATH_FOR_URI = DATABASE_PATH.replace(os.sep, '/')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + DATABASE_PATH_FOR_URI
-    # --- फिक्स खत्म ---
-    
-    print(f"लोकल एनवायरनमेंट डिटेक्ट हुआ। DB URI: {app.config['SQLALCHEMY_DATABASE_URI']}")
+    print(f"लोकल एनवायरनMENT डिटेक्ट हुआ। DB URI: {app.config['SQLALCHEMY_DATABASE_URI']}")
 
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -43,24 +37,34 @@ class UpdatePost(db.Model):
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
 
-# --- DB Creation Logic ---
-# यह ब्लॉक ऐप इनिशियलाइज़ होते ही रन होगा (Render और लोकल दोनों पर)
-with app.app_context():
-    print("डेटाबेस टेबल्स के लिए db.create_all() रन किया जा रहा है...")
-    db.create_all()
-    
-    # चेक करें कि क्या कोई पोस्ट पहले से है
-    if UpdatePost.query.count() == 0:
-        print("डेटाबेस खाली है, सैंपल पोस्ट जोड़ रहे हैं...")
-        post1 = UpdatePost(title='वेबसाइट लॉन्च (सैंपल पोस्ट)', content='जल संरक्षण और सीवर ट्रीटमेंट के महत्व पर जागरूकता फ़ैलाने के लिए यह शैक्षणिक वेबसाइट आज लॉन्च की गई है।')
-        post2 = UpdatePost(title='जल ही जीवन है (सैंपल लेख)', content='पानी बचाना क्यों ज़रूरी है? इस लेख में हम जल संरक्षण के आसान तरीकों पर चर्चा करेंगे...')
+# --- DB Creation Logic (यह नया और ज़्यादा सुरक्षित तरीका है) ---
+# यह 'flag' ट्रैक करेगा कि DB इनिशियलाइज़ हुआ है या नहीं
+db_initialized = False
+
+@app.before_request
+def initialize_database():
+    global db_initialized
+    # यह कोड सिर्फ एक बार चलेगा, जब db_initialized = False होगा
+    if not db_initialized:
+        print("डेटाबेस इनिशियलाइज़ेशन शुरू हो रहा है...")
+        # app_context की ज़रूरत नहीं है क्योंकि हम @app.before_request में हैं
+        db.create_all()
         
-        db.session.add(post1)
-        db.session.add(post2)
-        db.session.commit()
-        print("सैंपल पोस्ट जोड़ दिए गए हैं।")
-    else:
-        print("डेटाबेस पहले से मौजूद है।")
+        if UpdatePost.query.count() == 0:
+            print("डेटाबेस खाली है, सैंपल पोस्ट जोड़ रहे हैं...")
+            post1 = UpdatePost(title='वेबसाइट लॉन्च (सैंपल पोस्ट)', content='जल संरक्षण और सीवर ट्रीटमेंट के महत्व पर जागरूकता फ़ैलाने के लिए यह शैक्षणिक वेबसाइट आज लॉन्च की गई है।')
+            post2 = UpdatePost(title='जल ही जीवन है (सैंपल लेख)', content='पानी बचाना क्यों ज़रूरी है? इस लेख में हम जल संरक्षण के आसान तरीकों पर चर्चा करेंगे...')
+            
+            db.session.add(post1)
+            db.session.add(post2)
+            db.session.commit()
+            print("सैंपल पोस्ट जोड़ दिए गए हैं।")
+        else:
+            print("डेटाबेस पहले से मौजूद है।")
+        
+        db_initialized = True # Flag को 'True' सेट करें ताकि यह दोबारा न चले
+        print("डेटाबेस इनिशियलाइज़ेशन पूरा हुआ।")
+
 # --- End of DB Creation Logic ---
 
 
